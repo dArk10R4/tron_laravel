@@ -15,6 +15,7 @@ use App\Models\RefferedCommission;
 use App\Models\User;
 use App\Models\MoneyTransfer;
 use App\Models\UserRanking;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Nette\Utils\Random;
 use Purifier;
@@ -591,6 +592,75 @@ class UserController extends Controller
 
 
         $notify[] = ['success', 'Successfully Send Money'];
+
+        return back()->withNotify($notify);
+    }
+
+    public function coupon()
+    {
+        $pageTitle = 'Apply Coupon';
+        return view($this->template . 'user.apply_coupon', compact('pageTitle'));
+    }
+    public function applyCoupon(Request $request)
+    {
+        $general = GeneralSetting::first();
+
+        $request->validate([
+            'code' => 'required',
+            
+        ]);
+        $coupon = Coupon::where('code',$request->code)->first();
+        if (!$coupon) {
+            $notify[] = ['error', 'Coupon code not found'];
+
+            return back()->withNotify($notify);
+        }
+
+        if ($coupon->apply_limit<=count($coupon->users) || $coupon->status==0) {
+            $notify[] = ['error', 'Coupon expired'];
+
+            return back()->withNotify($notify);
+        }
+
+        $users = $coupon->users;
+        foreach ($users as $x) {
+            if ($x->id==auth()->id()) {
+                $notify[] = ['error', 'Coupon already used'];
+                return back()->withNotify($notify);
+            }
+        }
+        
+        $coupon->users()->attach(auth()->id());
+
+        $user = auth()->user();
+        
+        $user->balance = $user->balance + $coupon->bonus;
+        $user->save();
+
+        $general = GeneralSetting::first();
+
+        $trx = strtoupper(Str::random());
+
+
+
+        Transaction::create([
+            'trx' => $trx,
+            'gateway_id' => 0,
+            'amount' => $coupon->bonus,
+            'currency' => @$general->site_currency,
+            'details' => 'Coupon',
+            'charge' => 0,
+            'type' => 'receive',
+            'gateway_transaction' => $trx,
+            'user_id' => auth()->id(),
+            'payment_status' => 1
+        ]);
+
+
+
+
+
+        $notify[] = ['success', 'Successfully Apply Coupon'];
 
         return back()->withNotify($notify);
     }

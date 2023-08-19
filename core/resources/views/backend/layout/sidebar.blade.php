@@ -56,6 +56,17 @@
                 </li>
             @endif
 
+            <li class="sidebar-menu-caption">{{ __('Coupon') }}</li>
+
+            @if (auth()->guard('admin')->user()->can('manage-coupon'))
+                <li class="nav-item dropdown {{ menuActive('admin.coupon*') }}">
+                    <a href="{{ route('admin.coupon.index') }}" class="nav-link ">
+                        <i data-feather="box"></i>
+                        <span>{{ __('Coupon') }}</span>
+                    </a>
+                </li>
+            @endif
+
 
             <li class="sidebar-menu-caption">{{ __('User Management') }}</li>
 

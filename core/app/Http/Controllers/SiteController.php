@@ -47,6 +47,7 @@ class SiteController extends Controller
         $plan = Plan::where('status', 1)->get();
 
         return view($this->template . 'home', compact('pageTitle', 'sections', 'plan'));
+        
     }
 
     public function page(Request $request)

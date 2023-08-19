@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Multitenantable;
+use App\Models\Coupon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,7 +44,10 @@ class User extends Authenticatable
         'last_login' =>'datetime',
         'kyc_infos' => 'array'
     ];
-
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class,'users_coupons');
+    }
     public function getFullNameAttribute($value)
     {
         return $this->fname.' '.$this->lname;

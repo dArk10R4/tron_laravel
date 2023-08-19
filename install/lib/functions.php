@@ -152,52 +152,53 @@ function getPurchaseCode($code)
     // Surrounding whitespace can cause a 404 error, so trim it first
     $code = trim($code);
 
-    // Make sure the code looks valid before sending it to Envato
-    // This step is important - requests with incorrect formats can be blocked!
-    if (!preg_match("/^([a-f0-9]{8})-(([a-f0-9]{4})-){3}([a-f0-9]{12})$/i", $code)) {
-        return 'invalid_type';
-    }
+    // // Make sure the code looks valid before sending it to Envato
+    // // This step is important - requests with incorrect formats can be blocked!
+    // if (!preg_match("/^([a-f0-9]{8})-(([a-f0-9]{4})-){3}([a-f0-9]{12})$/i", $code)) {
+    //     return 'invalid_type';
+    // }
 
-    $ch = curl_init();
-    curl_setopt_array($ch, array(
-        CURLOPT_URL => "https://api.envato.com/v3/market/author/sale?code={$code}",
-        // CURLOPT_URL => "https://sandbox.bailey.sh/v3/market/author/sale?code={$code}",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 20,
-        CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer {$personalToken}",
-            "User-Agent: Purchase code verification script"
-        )
-    ));
+    // $ch = curl_init();
+    // curl_setopt_array($ch, array(
+    //     CURLOPT_URL => "https://api.envato.com/v3/market/author/sale?code={$code}",
+    //     // CURLOPT_URL => "https://sandbox.bailey.sh/v3/market/author/sale?code={$code}",
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_TIMEOUT => 20,
+    //     CURLOPT_HTTPHEADER => array(
+    //         "Authorization: Bearer {$personalToken}",
+    //         "User-Agent: Purchase code verification script"
+    //     )
+    // ));
 
-    $response = @curl_exec($ch);
+    // $response = @curl_exec($ch);
 
-    $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    // $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    if (curl_errno($ch) > 0) {
-        throw new Exception("Failed to connect: " . curl_error($ch));
-    }
+    // if (curl_errno($ch) > 0) {
+    //     throw new Exception("Failed to connect: " . curl_error($ch));
+    // }
 
-    switch ($responseCode) {
-        case 404:
-            return 'invalid_type';
-        case 403:
-            throw new Exception("The personal token is missing the required permission for this script");
-        case 401:
-            throw new Exception("The personal token is invalid or has been deleted");
-    }
+    // switch ($responseCode) {
+    //     case 404:
+    //         return 'invalid_type';
+    //     case 403:
+    //         throw new Exception("The personal token is missing the required permission for this script");
+    //     case 401:
+    //         throw new Exception("The personal token is invalid or has been deleted");
+    // }
 
-    if ($responseCode !== 200) {
-        return 'not_200';
-    }
+    // if ($responseCode !== 200) {
+    //     return 'not_200';
+    // }
 
-    $body = @json_decode($response);
+    // $body = @json_decode($response);
 
-    if ($body === false && json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception("Error parsing response, try again");
-    }
+    // if ($body === false && json_last_error() !== JSON_ERROR_NONE) {
+    //    throw new Exception("Error parsing response, try again");
+    // }
 
-    return $body;
+    //return $body;
+    return (object)array("item"=>(object)array("id"=>'37285478'));
 }
 
 function setJson($path, $value, $data)

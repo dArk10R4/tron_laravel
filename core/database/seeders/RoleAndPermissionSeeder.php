@@ -37,6 +37,7 @@ class RoleAndPermissionSeeder extends Seeder
             ['name' => 'manage-frontend', 'guard_name' => 'admin'],
             ['name' => 'manage-subscriber', 'guard_name' => 'admin'],
             ['name' => 'manage-report', 'guard_name' => 'admin'],
+            ['name' => 'manage-coupon', 'guard_name' => 'admin'],
         ];
         
         DB::table('permissions')->insert($permission);
@@ -63,6 +64,7 @@ class RoleAndPermissionSeeder extends Seeder
             'manage-frontend',
             'manage-subscriber',
             'manage-report',
+            'manage-coupon',
         ]);
 
 

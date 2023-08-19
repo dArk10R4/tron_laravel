@@ -26,6 +26,24 @@
         }
     },
 
+    "lucky":{
+        "content":{
+            "title":"text",
+            "time":"text",
+            "description":"textarea_nic"
+            
+        }
+    },
+    "roadmap":{
+        "content":{
+            "title":"text"
+        },
+        "element":{
+            "card_title":"text",
+            "card_icon":"icon",
+            "card_description":"textarea_nic"
+        }
+    },
 
     "feature":{
         "content":{

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ManageUserController;
 use App\Http\Controllers\Admin\ManageWithdrawController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Gateway\coinpayments\ProcessController as CoinpaymentsProcessController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
@@ -258,6 +259,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('commision/{user?}', [ReferralController::class, 'Commision'])->name('commision');
         });
 
+        Route::middleware('permission:manage-coupon,admin')->group(function () {
+            Route::resource('coupon', CouponController::class)->middleware('permission:manage-coupon,admin');
+            Route::post('coupon/changestatus/{id}', [CouponController::class, 'couponStatusChange'])->name('coupon.changestatus');
+        });
+
 
         Route::middleware('permission:manage-report,admin')->group(function () {
             Route::get('transaction-log/{user?}', [HomeController::class, 'transaction'])->name('transaction');
@@ -420,6 +426,8 @@ Route::name('user.')->group(function () {
             Route::get('transfer-money', [UserController::class, 'transfer'])->name('transfer_money');
             Route::post('transfer-money', [UserController::class, 'transferMoney']);
 
+            Route::get('apply-coupon', [UserController::class, 'coupon'])->name('apply_coupon');
+            Route::post('apply-coupon', [UserController::class, 'applyCoupon']);
 
 
 

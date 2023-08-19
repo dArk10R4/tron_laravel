@@ -43,7 +43,9 @@
       <li class="{{singleMenu('user.transfer_money')}}">
         <a href="{{ route('user.transfer_money') }}"><i class="fas fa-exchange-alt"></i> {{ __('Transfer Money') }}</a>
       </li>
-
+      <li class="{{singleMenu('user.apply_coupon')}}">
+        <a href="{{ route('user.apply_coupon') }}"><i data-feather="repeat"></i> {{ __('Apply Coupon') }}</a>
+      </li>
        <li class="{{activeMenu(route('user.money.log'))}}">
             <a href="{{ route('user.money.log') }}">
                 <i class="las la-exchange-alt me-3"></i> 
