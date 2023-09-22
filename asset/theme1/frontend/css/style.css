@@ -154,7 +154,7 @@ Header css
 }
 
 #header .logo img {
-    max-height: 75px;
+    max-height: 115px;
 }
 
 @media screen and (max-width:330px) {

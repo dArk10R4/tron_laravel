@@ -168,6 +168,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('users', [ManageUserController::class, 'index'])->name('user');
             Route::get('users/details/{user}', [ManageUserController::class, 'userDetails'])->name('user.details');
             Route::post('users/update/{user}', [ManageUserController::class, 'userUpdate'])->name('user.update');
+            Route::post('users/delete/{id}',[ManageUserController::class, 'userDelete'])->name('user.delete');
             Route::post('users/balance/{user}', [ManageUserController::class, 'userBalanceUpdate'])->name('user.balance.update');
             Route::post('users/mail/{user}', [ManageUserController::class, 'sendUserMail'])->name('user.mail');
             Route::get('users/search', [ManageUserController::class, 'index'])->name('user.search');
@@ -429,6 +430,7 @@ Route::name('user.')->group(function () {
             Route::get('apply-coupon', [UserController::class, 'coupon'])->name('apply_coupon');
             Route::post('apply-coupon', [UserController::class, 'applyCoupon']);
 
+            Route::get('lucky-ticket', [UserController::class, 'luckyTicket'])->name('lucky_ticket');
 
 
 

@@ -39,20 +39,26 @@
           </li>
         </ul>
       </li>
+      <li class="<?php echo e(singleMenu('user.apply_coupon')); ?>">
+        <a href="<?php echo e(route('user.apply_coupon')); ?>"><i data-feather="fas fa-exchange-alt"></i> <?php echo e(__('Apply Coupon')); ?></a>
+      </li>
+
+      <li class="<?php echo e(singleMenu('user.lucky_ticket')); ?>">
+        <a href="<?php echo e(route('user.lucky_ticket')); ?>"><i data-feather="repeat"></i> <?php echo e(__('Lucky Ticket')); ?></a>
+      </li>
 
       <li class="<?php echo e(singleMenu('user.transfer_money')); ?>">
         <a href="<?php echo e(route('user.transfer_money')); ?>"><i class="fas fa-exchange-alt"></i> <?php echo e(__('Transfer Money')); ?></a>
       </li>
-      <li class="<?php echo e(singleMenu('user.apply_coupon')); ?>">
-        <a href="<?php echo e(route('user.apply_coupon')); ?>"><i data-feather="repeat"></i> <?php echo e(__('Apply Coupon')); ?></a>
-      </li>
-       <li class="<?php echo e(activeMenu(route('user.money.log'))); ?>">
-            <a href="<?php echo e(route('user.money.log')); ?>">
-                <i class="las la-exchange-alt me-3"></i> 
-                <?php echo e(__('Money Transfer Log')); ?>
+      <li class="<?php echo e(activeMenu(route('user.money.log'))); ?>">
+        <a href="<?php echo e(route('user.money.log')); ?>">
+          <i class="las la-exchange-alt me-3"></i> 
+          <?php echo e(__('Money Transfer Log')); ?>
 
-            </a>
-        </li>
+        </a>
+      </li>
+      
+
 
         
       <li class="<?php echo e(singleMenu('user.interest.log')); ?>">

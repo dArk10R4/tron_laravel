@@ -664,6 +664,11 @@ class UserController extends Controller
 
         return back()->withNotify($notify);
     }
+    public function luckyTicket()
+    {
+        $pageTitle = 'Lucky Ticket';
+        return view($this->template . 'user.lucky_ticket', compact('pageTitle'));       
+    }
 
     public function transactionLog(Request $request)
     {

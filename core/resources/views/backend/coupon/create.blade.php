@@ -23,7 +23,7 @@
                                         <label class="font-weight-bold">{{ __('Bonus Amount') }}<span
                                                 class="text-danger">*</span></label></label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" name="bonus"
+                                            <input type="number" class="form-control" name="bonus" step="0.00001"
                                                 value="{{ old('bonus') }}" placeholder="Bonus Amount">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">{{ @$general->site_currency }}</div>

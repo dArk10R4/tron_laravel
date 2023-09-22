@@ -132,6 +132,20 @@ class ManageUserController extends Controller
         return back()->withNotify($notify);
     }
 
+    public function userDelete($id)
+    {
+        $user = User::find($id);
+        
+        if(!$user) {
+            $notify[] = ['error',"User not found"];
+            return back()->withNotify($notify);
+        }
+        $user->delete();
+
+        $notify[] = ['success',"User deleted successfully"];
+        return redirect()->route('admin.user')->withNotify($notify);
+    }
+
     public function sendUserMail(Request $request, User $user)
     {
         $data = $request->validate([
